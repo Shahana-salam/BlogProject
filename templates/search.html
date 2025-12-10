@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="posts-wrapper">
+
+    <div class="post-card">
+        {% for post in posts %}
+
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="post-img">
+            {% else %}
+            <img src="{% static 'images/no-image.jpg' %}" class="post-img">
+            {% endif %}
+
+            <h4 class="post-title">{{ post.title }}</h4>
+
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> {{ post.created_at|date:"F j, Y" }} |
+                <i class="far fa-user"></i> {{ post.author.username }} |
+                <i class="far fa-comments"></i> {{ post.comments.count }}
+            </p>
+
+            <p class="post-text">{{ post.content|truncatechars:150 }}</p>
+
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

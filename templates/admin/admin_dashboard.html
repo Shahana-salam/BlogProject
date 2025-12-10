@@ -1,0 +1,50 @@
+{% extends "admin/admin_base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, Admin</h2>
+
+<div class="row mt-4">
+
+    <!-- Total Users -->
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3 shadow-lg">
+            <div class="card-body d-flex align-items-center">
+                <i class="bi bi-people-fill fs-1 me-3"></i>
+                <div>
+                    <h5 class="card-title mb-0">Total Users</h5>
+                    <h3 class="mt-1">{{ total_users }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Posts -->
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3 shadow-lg">
+            <div class="card-body d-flex align-items-center">
+                <i class="bi bi-file-post fs-1 me-3"></i>
+                <div>
+                    <h5 class="card-title mb-0">Total Posts</h5>
+                    <h3 class="mt-1">{{ total_posts }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blocked Users -->
+    <div class="col-md-4">
+        <div class="card text-white bg-danger mb-3 shadow-lg">
+            <div class="card-body d-flex align-items-center">
+                <i class="bi bi-person-x-fill fs-1 me-3"></i>
+                <div>
+                    <h5 class="card-title mb-0">Blocked Users</h5>
+                    <h3 class="mt-1">{{ blocked_users }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

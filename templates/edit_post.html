@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+
+{% load static %}
+
+
+<div class="container py-4">
+
+    <div class="card shadow-sm col-md-6 mx-auto">
+        <div class="card-body">
+
+            <h3 class="text-center mb-3">Edit Post</h3>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <label class="form-label">Title</label>
+                <input type="text" name="title" value="{{ post.title }}" class="form-control mb-2">
+
+                <label class="form-label">Content</label>
+                <textarea name="content" rows="5" class="form-control mb-3">{{ post.content }}</textarea>
+
+                <label class="form-label">Change Image</label>
+                <input type="file" name="image" class="form-control mb-3">
+
+                {% if post.image %}
+                <img src="{{ post.image.url }}" width="100%" class="rounded mb-3">
+                {% endif %}
+
+                <button type="submit" class="btn btn-dark w-100">Save Changes</button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="site-banner" role="banner" aria-label="Blog banner" >
+    <div class="banner-overlay">
+        <div class="banner-content container">
+            <h1 class="banner-title">A World of Stories in One Place</h1>
+            <p class="banner-sub">From inspiring journeys to delicious recipes and the latest tech trends — explore content from every category
+                and add your own voice today.</p> <!-- Optional: CTA button -->
+            <a href="{% url 'create_post' %}" class="banner-cta">Write a post</a>
+        </div>
+    </div>
+</section> <!-- MAIN SECTION -->
+<div class="container blog-container">
+    <!-- RIGHT CONTENT -->
+    <div class="content w-100">
+        <h3 class="section-title">RECENT POST</h3>
+        <div class="posts-grid">
+            {% for post in page %}
+            <div class="post-card">
+                <!-- IMAGE -->
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="post-img">
+                {% else %} <img src="{% static 'images/no-image.jpg' %}" class="post-img">
+                {% endif %}
+                <!-- TITLE -->
+                <h4 class="post-title">{{ post.title }}</h4>
+                <!-- META -->
+                <p class="post-meta">
+                    <i class="far fa-calendar"></i> {{ post.created_at|date:"F j, Y" }} |
+                    <i class="far fa-user"></i> {{ post.author.username }} |
+                    <a href="{% url 'post_comments' post.id %}" style="text-decoration:none;">
+                        {# Comment Icon #}
+                        <i class="far fa-comments"></i>
+                        {# Comment Count Text #} {{ post.comments.count }} </a>
+                </p> <!-- CONTENT (SHORT) -->
+                <p class="post-text">
+                    {{ post.content|truncatechars:150 }}</p>
+            </div> {% endfor %}
+        </div>
+        <div class="d-flex justify-content-center mt-4">
+            <ul class="pagination">
+                {% if page.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; Previous</a>
+                </li> {% endif %} {% for num in page.paginator.page_range %}
+                <li class="page-item {% if page.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ num }}</a>
+                </li>
+                {% endfor %} {% if page.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next &raquo;</a>
+                </li> {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

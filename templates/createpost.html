@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-4" style="max-width: 700px;">
+
+    <!-- Show Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
+        {% csrf_token %}
+<div>     <h2 class="mb-4" style="color:black;text-align:center">Create New Post</h2>
+</div>
+        <!-- TITLE -->
+        <div class="mb-3">
+            <label class="form-label">Post Title</label>
+            {{ form.title }}
+        </div>
+
+        <!-- CONTENT -->
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            {{ form.content }}
+        </div>
+
+        <!-- CATEGORY -->
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            {{ form.category }}
+        </div>
+
+        <!-- IMAGE UPLOAD -->
+        <div class="mb-3">
+            <label class="form-label">Upload Image</label>
+            {{ form.image }}
+        </div>
+
+        <button type="submit" class="btn btn-dark w-100">
+            Publish Post
+        </button>
+    </form>
+</div>
+
+{% endblock %}

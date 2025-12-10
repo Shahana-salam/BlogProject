@@ -1,0 +1,51 @@
+{% extends "admin/admin_base.html" %}
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+{% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+<h2 class="mb-3">Manage Users</h2>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.id }}</td>
+            <td>{{ u.username }}</td>
+            <td>
+                {% if u.is_active %}
+                    <span class="badge bg-success">Active</span>
+                {% else %}
+                    <span class="badge bg-danger">Blocked</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if u.is_active %}
+                    <a href="{% url 'block_user' u.id %}" class="btn btn-warning btn-sm">Block</a>
+                {% else %}
+                    <a href="{% url 'unblock_user' u.id %}" class="btn btn-success btn-sm">Unblock</a>
+                {% endif %}
+
+                <a href="{% url 'delete_user' u.id %}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('Delete this user?');">
+                   Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
