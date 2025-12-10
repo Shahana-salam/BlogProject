@@ -69,7 +69,7 @@ def create_Category(request):
         if form.is_valid():
             form.save()
 
-            return redirect('admin_view')
+            return redirect('admin_dashboard')
     else:
         form = CategoryForm()
 
