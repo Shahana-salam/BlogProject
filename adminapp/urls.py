@@ -16,5 +16,6 @@ path("admin/dashboard/", views.admin_dashboard, name="admin_dashboard"),
     # POST MANAGEMENT
     path("admin/posts/", views.admin_posts, name="admin_posts"),
     path("admin/posts/delete/<int:post_id>/", views.delete_post, name="delete_post"),
+path('create_category/',views.create_Category,name='create_category'),
 ]
 

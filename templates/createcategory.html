@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "admin/admin_base.html" %}
 
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
 <div class="container mt-5" style="max-width: 450px;">
 
     <h2 class="text-center mb-4">Create Category </h2>
@@ -18,11 +15,10 @@
             <label class="form-label">Category </label>
             {{ form.name }}
         </div>
-          <button type="submit" style="background:#8B0000; color:#fff;" class="btn w-100">
+          <button type="submit" class="btn btn-dark w-100">
             Save
         </button>
 </form>
 </div>
 
-</body>
-</html>
+{% endblock %}

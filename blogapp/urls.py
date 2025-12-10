@@ -12,7 +12,7 @@ urlpatterns = [
     path('search/',views.search_post,name='search'),
     path('logout/',views.logout_user,name='logout'),
     path('createpost/',views.createPost,name='create_post'),
-    path('create_category/',views.create_Category,name='create_category'),
+
     path('profile/',views.my_profile, name='my_profile'),
     path('editposts/<int:post_id>/',views.edit_post,name='edit_posts'),
     path('deleteposts/<int:post_id>/',views.delete_posts,name='delete_posts'),

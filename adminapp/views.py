@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, redirect
 
+from blogapp.forms import CategoryForm
 from blogapp.models import UserProfile, Posts
 
 
@@ -59,3 +60,18 @@ def delete_post(request, post_id):
     post.delete()
     messages.success(request, "Post deleted successfully")
     return redirect("admin_posts")
+
+
+def create_Category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('admin_view')
+    else:
+        form = CategoryForm()
+
+    return render(request, 'createcategory.html', {'form':form})
+
