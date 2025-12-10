@@ -79,6 +79,8 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 25px;
     align-items: flex-start !important;
+    position: relative;
+    z-index: 1;
 }
 .post-card {
     background: black;
@@ -87,6 +89,9 @@ body {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     height: auto !important;
     display: block !important;
+    position: relative;
+    overflow: hidden !important;   /* stops link from leaking */
+    z-index: 2;
 }
 .post-img {
     width: 100%;
@@ -168,6 +173,7 @@ body {
   align-items: center;
   color: #fff;
   margin-bottom: 2rem;
+  z-index: 10;
 }
 
 /* subtle dark overlay to ensure text contrast */

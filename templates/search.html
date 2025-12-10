@@ -14,7 +14,7 @@
             <img src="{% static 'images/no-image.jpg' %}" class="post-img">
             {% endif %}
 
-            <h4 class="post-title">{{ post.title }}</h4>
+        <a href="{% url 'detail_view' post.id %}" style="text-decoration:none;"> <h4 class="post-title">{{ post.title }}</h4></a>
 
             <p class="post-meta">
                 <i class="far fa-calendar"></i> {{ post.created_at|date:"F j, Y" }} |

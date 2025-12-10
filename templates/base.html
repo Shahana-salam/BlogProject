@@ -42,7 +42,17 @@
 
 .post-card {
     width: 350px;
-    color:black;             /* adjust card width */
+    color:black;
+    position: relative;
+    overflow: hidden !important;   /* stops link from leaking */
+    z-index: 2;/* adjust card width */
+}
+    .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    margin-top: 20px;
 }
 </style>
 
@@ -76,16 +86,15 @@
 
                 <!-- User Profile -->
                 {% if request.user.is_authenticated %}
-                <li class="nav-item dropdown ms-3">
-                    <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                        <img src="{% if request.user.userprofile.profile_pic %}{{ request.user.userprofile.profile_pic.url }}{% else %}{% static 'images/default-user.png' %}{% endif %}" class="rounded-circle" style="width:40px; height:40px; object-fit:cover; border:2px solid #fff;">
+                <li class="nav-item ms-3">
+                   <a  href="{% url 'my_profile' %}" style="text-decoration:none;color:white;">
+                        <img  src="{% if request.user.userprofile.profile_pic %}{{ request.user.userprofile.profile_pic.url }}{% else %}{% static 'images/default-user.png' %}{% endif %}" class="rounded-circle" style="width:40px; height:40px; object-fit:cover; border:2px solid #fff;">
                         <span class="ms-2">{{ request.user.username }}</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="{% url 'my_profile' %}">My Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a></li>
-                    </ul>
+                </li>
+                <li class="nav-item ms-3">
+                <a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a>
+
                 </li>
                 {% else %}
                 <li class="nav-item ms-3"><a class="btn btn-outline-light" href="{% url 'user_login' %}">Login</a></li>

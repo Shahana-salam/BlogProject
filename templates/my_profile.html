@@ -29,6 +29,7 @@
             font-weight: 700;
             letter-spacing: 1px;"> Posts</h4>
 
+
     {% if my_posts %}
     <div class="row">
         {% for post in my_posts %}
@@ -41,6 +42,15 @@
 
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="post-meta">
+                        <i class="far fa-calendar"></i> {{ post.created_at|date:"F j, Y" }} |
+                        <a href="{% url 'post_comments' post.id %}" style="text-decoration:none;">
+                        {# Comment Icon #}
+                        <i class="far fa-comments"></i>
+                        {# Comment Count Text #} {{ post.comments.count }} </a>
+                    </p>
+                        <p class="post-text">
+                        {{ post.content|truncatechars:150 }}</p>
 
                     <a href="{% url 'edit_posts' post.id %}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square fs-5"></i></a>
                     <a href="{% url 'delete_posts' post.id %}"

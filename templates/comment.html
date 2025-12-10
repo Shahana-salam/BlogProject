@@ -24,13 +24,13 @@
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
+                <button type="submit" class="btn btn-dark btn-sm">Post Comment</button>
             </form>
         </div>
     </div>
 
     <!-- Display comments -->
-    <h6>Comments</h6>
+    <h4 style="color:white;">Comments</h4>
     {% for comment in comments %}
         <div class="card mb-2">
             <div class="card-body">
@@ -51,7 +51,7 @@
             </div>
         </div>
     {% empty %}
-        <p>No comments yet. Be the first to comment!</p>
+        <p style="color:white;">No comments yet. Be the first to comment!</p>
     {% endfor %}
 </div>
 

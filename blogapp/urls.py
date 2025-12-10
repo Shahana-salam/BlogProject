@@ -24,7 +24,7 @@ urlpatterns = [
     path("load-comments/<int:post_id>/", views.load_comments, name="load_comments"),
     path('forgot-password/', views.forgot_password, name='forgot_password'),
     path('reset-password/<str:email>/', views.reset_password, name='reset_password'),
-
+    path('detail_view/<int:post_id>/', views.detailsView, name='detail_view'),
 
 ]
 

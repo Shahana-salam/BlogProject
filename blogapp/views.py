@@ -98,7 +98,7 @@ def login_user(request):
 
     return render(request, 'login.html')
 
-
+'''
 
 def User_view(request):
     posts = Posts.objects.all().order_by('-created_at')
@@ -114,6 +114,24 @@ def User_view(request):
 
 
     return render(request, 'user_view.html', {'posts':posts, 'page':page})
+'''
+
+
+
+def User_view(request):
+    posts_list = Posts.objects.all().order_by('-created_at')  # all posts
+    paginator = Paginator(posts_list, 4)  # 4 posts per page
+
+    page_number = request.GET.get('page')
+    try:
+        page = paginator.get_page(page_number)  # safe method, handles invalid page numbers
+    except EmptyPage:
+        page = paginator.page(paginator.num_pages)
+
+    context = {
+        'page': page,  # page object
+    }
+    return render(request, 'user_view.html', context)
 
 
 def search_post(request):
@@ -156,19 +174,6 @@ def createPost(request):
 
     return render(request, "createpost.html", {"form": form})
 
-
-def create_Category(request):
-    if request.method == 'POST':
-        form = CategoryForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-
-            return redirect('admin_view')
-    else:
-        form = CategoryForm()
-
-    return render(request, 'createcategory.html', {'form':form})
 
 
 
@@ -382,3 +387,8 @@ def reset_password(request, email):
 
 def entry_page(request):
     return render(request, 'both_viewpage.html')
+
+
+def detailsView(request, post_id):
+    post = get_object_or_404(Posts, id=post_id)
+    return render(request, "detailview.html", {"post": post})

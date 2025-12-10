@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex justify-content-center">
+<div class="post-card position-relative" style="width: 60%;  background: rgba(0, 0, 0, 0.9);box-shadow: 0 8px 30px rgba(0,0,0,0.5);">
+
+    <!-- CLICKABLE LINK COVERING FULL CARD -->
+    <a href="{% url 'detail_view' post.id %}" class="stretched-link"></a>
+
+    <!-- IMAGE (clickable because stretched-link covers it) -->
+    {% if post.image %}
+        <img src="{{ post.image.url }}" class="post-img" alt="{{ post.title }}" style="width: 100%;   height: 380px; object-fit: cover; ">
+    {% else %}
+        <img src="{% static 'images/no-image.jpg' %}" class="post-img" alt="No Image">
+    {% endif %}
+
+    <!-- TITLE -->
+    <h4 class="post-title">{{ post.title }}</h4>
+
+    <!-- META -->
+    <p class="post-meta">
+        <i class="far fa-calendar"></i> {{ post.created_at|date:"F j, Y" }} |
+        <i class="far fa-user"></i> {{ post.author.username }} |
+        <a href="{% url 'post_comments' post.id %}" style="text-decoration:none;">
+                        {# Comment Icon #}
+                        <i class="far fa-comments"></i>
+                        {# Comment Count Text #} {{ post.comments.count }} </a>
+    </p>
+
+    <!-- CONTENT -->
+    <p class="post-text" style="font-size: 1.2rem; line-height: 1.8;">{{ post.content|truncatechars:150 }}</p>
+
+</div>
+</div>
+
+
+{% endblock %}
